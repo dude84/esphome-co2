@@ -13,7 +13,7 @@ substitutions:
 
   # Per-device network
   static_ip: "10.0.30.61"
-  ap_ssid: "Sg-Co2 ${room} Fallback Hotspot"
+  ap_ssid: "Sg-Co2 ${room} Fallback"
 
   # Pins (ESP32-C3)
   sda_pin: "GPIO2"

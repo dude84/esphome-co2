@@ -10,7 +10,7 @@ substitutions:
   device_description: "SG SDC41 CO2 Sensor"
 
   static_ip: "10.0.30.61"
-  ap_ssid: "Sg-Co2 ${room} Fallback Hotspot"
+  ap_ssid: "Sg-Co2 ${room} Fallback"
 
   sda_pin: "GPIO2"
   scl_pin: "GPIO3"
