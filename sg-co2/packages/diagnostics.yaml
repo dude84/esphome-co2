@@ -1,5 +1,15 @@
-# Diagnostics: logging + onboard LED.
+# Diagnostics: logging + onboard LED + config version.
 logger:
+
+# Surfaces the pinned sentinel_version as a diagnostic entity in HA,
+# so you can see which release a device is running. Resolves to "dev"
+# from the local dev consumer.
+text_sensor:
+  - platform: template
+    name: "Config Version"
+    entity_category: diagnostic
+    lambda: 'return {"${sentinel_version}"};'
+    update_interval: never
 
 light:
   - platform: binary

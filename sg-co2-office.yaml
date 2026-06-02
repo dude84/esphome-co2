@@ -2,7 +2,7 @@
 # The ONLY file this device needs — everything else is pulled from the public repo.
 # Take a new release by bumping sentinel_version. Flash from Home Assistant.
 substitutions:
-  sentinel_version: v0.1.0            # bump this ONE value to take a release
+  sentinel_version: v0.1.1            # bump this ONE value to take a release
 
   # Per-device identity
   name: "sg-co2-office"
