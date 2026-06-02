@@ -4,14 +4,16 @@
 substitutions:
   sentinel_version: v0.1.1            # bump this ONE value to take a release
 
-  # Per-device identity
-  name: "sg-co2-office"
-  friendly_name: "SG CO2 Office"
+  # Per-device identity — set the room once; name/friendly_name/AP derive from it.
+  room: "Office"                       # display form (capitalized)
+  room_id: "office"                    # slug form (lowercase, [a-z0-9-])
+  name: "sg-co2-${room_id}"
+  friendly_name: "SG CO2 ${room}"
   device_description: "SG SDC41 CO2 Sensor"
 
   # Per-device network
   static_ip: "10.0.30.61"
-  ap_ssid: "Sg-Co2-2 Fallback Hotspot"
+  ap_ssid: "Sg-Co2 ${room} Fallback Hotspot"
 
   # Pins (ESP32-C3)
   sda_pin: "GPIO2"

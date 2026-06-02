@@ -3,12 +3,14 @@
 substitutions:
   sentinel_version: dev
 
-  name: "sg-co2-office"
-  friendly_name: "SG CO2 Office"
+  room: "Office"
+  room_id: "office"
+  name: "sg-co2-${room_id}"
+  friendly_name: "SG CO2 ${room}"
   device_description: "SG SDC41 CO2 Sensor"
 
   static_ip: "10.0.30.61"
-  ap_ssid: "Sg-Co2-2 Fallback Hotspot"
+  ap_ssid: "Sg-Co2 ${room} Fallback Hotspot"
 
   sda_pin: "GPIO2"
   scl_pin: "GPIO3"
