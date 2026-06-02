@@ -3,13 +3,23 @@ logger:
 
 # Surfaces the pinned sentinel_version as a diagnostic entity in HA,
 # so you can see which release a device is running. Resolves to "dev"
-# from the local dev consumer.
+# from the local dev consumer. A template text_sensor only publishes on
+# its update_interval — with `never` it would stay blank — so publish the
+# static string once at boot instead.
 text_sensor:
   - platform: template
     name: "Config Version"
+    id: config_version
     entity_category: diagnostic
-    lambda: 'return {"${sentinel_version}"};'
     update_interval: never
+
+esphome:
+  on_boot:
+    priority: -100
+    then:
+      - text_sensor.template.publish:
+          id: config_version
+          state: "${sentinel_version}"
 
 light:
   - platform: binary
