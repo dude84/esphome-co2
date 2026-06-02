@@ -1,0 +1,49 @@
+# Production consumer for the SG CO2 office device.
+# The ONLY file this device needs — everything else is pulled from the public repo.
+# Take a new release by bumping sentinel_version. Flash from Home Assistant.
+substitutions:
+  sentinel_version: v0.1.0            # bump this ONE value to take a release
+
+  # Per-device identity
+  name: "sg-co2-office"
+  friendly_name: "SG CO2 Office"
+  device_description: "SG SDC41 CO2 Sensor"
+
+  # Per-device network
+  static_ip: "10.0.30.61"
+  ap_ssid: "Sg-Co2-2 Fallback Hotspot"
+
+  # Pins (ESP32-C3)
+  sda_pin: "GPIO2"
+  scl_pin: "GPIO3"
+  led_pin: "GPIO8"
+
+  # Tuning
+  co2_update_interval: "30s"
+
+  # Secrets — consumer CAN use !secret (remote packages cannot)
+  wifi_ssid: !secret wifi_ssid
+  wifi_password: !secret wifi_password
+  api_password: !secret api_password
+  ota_password: !secret ota_password
+  ap_password: !secret failsafe_ap_password
+
+esphome:
+  name: ${name}
+  comment: ${device_description}
+  friendly_name: ${friendly_name}
+
+esp32:
+  board: esp32-c3-devkitm-1
+  framework:
+    type: arduino
+
+packages:
+  remote:
+    url: https://github.com/dude84/esphome-co2
+    ref: ${sentinel_version}
+    refresh: 1d
+    files:
+      - sg-co2/packages/network.yaml
+      - sg-co2/packages/co2.yaml
+      - sg-co2/packages/diagnostics.yaml

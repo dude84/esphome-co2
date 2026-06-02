@@ -1,0 +1,21 @@
+# SCD41 CO2 / temperature / humidity sensor over I2C (official scd4x component).
+i2c:
+  sda: ${sda_pin}
+  scl: ${scl_pin}
+  scan: true
+  id: i2c_bus
+
+sensor:
+  - platform: scd4x
+    i2c_id: i2c_bus
+    update_interval: ${co2_update_interval}
+    co2:
+      name: "CO2"
+      filters:
+        - or:
+            - delta: 25
+            - heartbeat: 5min
+    temperature:
+      name: "Temperature"
+    humidity:
+      name: "Humidity"

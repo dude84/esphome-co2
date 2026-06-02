@@ -1,0 +1,13 @@
+# Diagnostics: logging + onboard LED.
+logger:
+
+light:
+  - platform: binary
+    name: "LED"
+    output: led_output
+
+output:
+  - id: led_output
+    platform: gpio
+    inverted: true
+    pin: ${led_pin}

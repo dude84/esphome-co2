@@ -1,0 +1,38 @@
+# Local-dev consumer — builds from the working tree (no fetch).
+# Iterate here before tagging a release.
+substitutions:
+  sentinel_version: dev
+
+  name: "sg-co2-office"
+  friendly_name: "SG CO2 Office"
+  device_description: "SG SDC41 CO2 Sensor"
+
+  static_ip: "10.0.30.61"
+  ap_ssid: "Sg-Co2-2 Fallback Hotspot"
+
+  sda_pin: "GPIO2"
+  scl_pin: "GPIO3"
+  led_pin: "GPIO8"
+
+  co2_update_interval: "30s"
+
+  wifi_ssid: !secret wifi_ssid
+  wifi_password: !secret wifi_password
+  api_password: !secret api_password
+  ota_password: !secret ota_password
+  ap_password: !secret failsafe_ap_password
+
+esphome:
+  name: ${name}
+  comment: ${device_description}
+  friendly_name: ${friendly_name}
+
+esp32:
+  board: esp32-c3-devkitm-1
+  framework:
+    type: arduino
+
+packages:
+  network: !include sg-co2/packages/network.yaml
+  co2: !include sg-co2/packages/co2.yaml
+  diagnostics: !include sg-co2/packages/diagnostics.yaml
